@@ -217,12 +217,12 @@
       min-height: 80px;
     }
     @media (max-width: 600px) {
-      .hero-skyline { transform: scale(1.15); }
-      .hero-skyline svg { height: 150px; }
+      .hero-skyline { transform: scale(1.2); }
+      .hero-skyline svg { height: 220px; }
 
-      /* Shrink fades so towers aren't buried */
-      .hero-fade-1 { height: 28px; bottom: 0; }
-      .hero-fade-2 { height: 44px; bottom: -8px; }
+      /* Drastically reduce fades — filter blur was spreading 60-80px upward, burying towers */
+      .hero-fade-1 { height: 12px; bottom: 0; filter: blur(5px); }
+      .hero-fade-2 { height: 18px; bottom: -4px; filter: blur(7px); }
     }
 
     /* ── BOTTOM GLOW — backlights the skyline silhouette ── */
@@ -1970,8 +1970,8 @@
     @media (max-width: 600px) {
 
       /* ── Hero ── */
-      .hero          { padding: 96px 20px 210px; }
-      .hero-bottom-glow { height: 260px; }
+      .hero          { padding: 96px 20px 250px; }
+      .hero-bottom-glow { height: 300px; }
       .hero h1       { font-size: clamp(28px, 8vw, 40px); line-height: 1.25; }
       .hero-body     { font-size: 14px; line-height: 1.8; margin-bottom: 28px; }
       .hero-eyebrow  { font-size: 10px; margin-bottom: 12px; }
@@ -4337,7 +4337,7 @@
     const hero    = document.querySelector('.hero');
     if (!skyline || !hero) return;
 
-    /* Smaller start scale on mobile so towers stay visible */
+    /* Mobile: subtle 1.2→1.0 zoom; desktop: dramatic 1.85→1.0 */
     var startScale = window.innerWidth < 600 ? 1.2 : 1.85;
     var endScale   = 1.0;
 
