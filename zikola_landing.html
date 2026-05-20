@@ -34,6 +34,8 @@
 
     html {
       font-family: 'Cairo', 'Noto Sans Arabic', Arial, sans-serif;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
     body {
       background: var(--bg);
@@ -45,6 +47,8 @@
       font-synthesis: none;
       text-rendering: optimizeLegibility;
     }
+    /* Force Cairo on every element — prevents Android from substituting system Arabic font */
+    *, *::before, *::after { font-family: inherit; }
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
     img { display: block; max-width: 100%; }
@@ -2038,8 +2042,15 @@
       .faq-q         { font-size: 14px; line-height: 1.5; }
       .faq-btn       { padding: 14px 0; }
 
-      /* ── Partners ── */
+      /* ── Partners — 3×3 grid for 9 logos ── */
       .partners-inner { padding: 0 16px; }
+      .partners-track {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .partner-item { padding: 16px 10px; border-radius: 10px; }
+      .partner-logo  { height: 22px; max-width: 80px; }
 
       /* ── Footer ── */
       .footer-cta-btn { width: 100%; justify-content: center; }
@@ -4337,6 +4348,12 @@
     const glow    = document.querySelector('.hero-bottom-glow');
     const hero    = document.querySelector('.hero');
     if (!skyline || !hero) return;
+
+    /* Mobile: preserve tower proportions — "none" squishes 1440px viewBox to 390px */
+    if (window.innerWidth < 600) {
+      var svgEl = skyline.querySelector('svg');
+      if (svgEl) svgEl.setAttribute('preserveAspectRatio', 'xMidYMax slice');
+    }
 
     /* Mobile: subtle 1.15→1.0 zoom; desktop: dramatic 1.85→1.0 */
     var startScale = window.innerWidth < 600 ? 1.15 : 1.85;
