@@ -6,7 +6,7 @@
   <title>Zikola — Hero + Footer Test</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Staatliches&display=block" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Staatliches&display=swap" rel="stylesheet">
   <style>
 
     /* ─────────────────────────────────────────
@@ -208,7 +208,17 @@
       transform-origin: bottom center;
       will-change: transform;
     }
-    .hero-skyline svg { display: block; width: 100%; }
+    .hero-skyline svg {
+      display: block;
+      width: 100%;
+      min-height: 80px;
+    }
+    @media (max-width: 600px) {
+      .hero-skyline {
+        transform: scale(1.2);
+      }
+      .hero-skyline svg { min-height: 110px; }
+    }
 
     /* ── BOTTOM GLOW — backlights the skyline silhouette ── */
     .hero-bottom-glow {
@@ -267,13 +277,13 @@
     /* Large Staatliches display heading */
     .svc-heading {
       font-family: var(--disp);
-      font-size: clamp(56px, 11vw, 148px);
+      font-size: clamp(40px, 11vw, 148px);
       font-weight: 400;
       letter-spacing: 0.06em;
       text-align: center;
       color: var(--text);
       line-height: 0.9;
-      padding: 80px 24px 56px;
+      padding: clamp(40px, 8vw, 80px) 24px clamp(28px, 5vw, 56px);
       user-select: none;
     }
 
@@ -1950,12 +1960,15 @@
     }
 
     /* ═══════════════════════════════════════════
-       MOBILE — 480px and below
+       MOBILE — 600px and below
     ═══════════════════════════════════════════ */
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
 
       /* Hero */
-      .hero { padding: 96px 20px 260px; }
+      .hero { padding: 96px 20px 200px; }
+
+      /* Hero glow — taller on mobile so towers backlight properly */
+      .hero-bottom-glow { height: 280px; }
 
       /* Stack email + CTA vertically */
       .hero-cta-row {
@@ -1964,60 +1977,68 @@
         gap: 12px;
         width: 100%;
       }
-      .hero-input  { width: 100%; text-align: center; }
-      .btn-cta     { width: 100%; justify-content: center; height: 52px; }
+      .hero-input  { width: 100%; text-align: center; font-size: 15px; }
+      .btn-cta     { width: 100%; justify-content: center; height: 52px; font-size: 15px; }
 
-      /* Section headings scale down a touch more on phones */
+      /* Hero text */
+      .hero h1     { font-size: clamp(30px, 8vw, 42px); line-height: 1.25; }
+      .hero-body   { font-size: 14px; line-height: 1.85; margin-bottom: 32px; }
+      .hero-eyebrow { font-size: 10px; margin-bottom: 14px; }
+
+      /* Services heading */
+      .svc-heading { font-size: clamp(32px, 8vw, 48px); }
+
+      /* Section headings */
       .res-display, .docs-display, .loc-display,
       .coverage-title, .process-title, .faq-title {
-        font-size: clamp(36px, 9vw, 48px);
+        font-size: clamp(34px, 8vw, 46px);
       }
 
-      /* Touch targets — bring all buttons to 44px min */
-      .doc-preview-btn, .doc-dl-btn {
-        min-height: 44px;
-        padding: 12px 20px;
-      }
-      .btn-svc-cta {
-        min-height: 44px;
-        padding: 13px 28px;
-      }
+      /* Touch targets */
+      .doc-preview-btn, .doc-dl-btn { min-height: 44px; padding: 12px 20px; }
+      .btn-svc-cta { min-height: 44px; padding: 13px 28px; }
 
-      /* Docs trust bar — reduce side padding */
+      /* Docs trust bar */
       .docs-trust { padding: 16px clamp(14px, 4vw, 24px); }
 
-      /* Partners inner padding */
+      /* Partners */
       .partners-inner { padding: 0 clamp(14px, 4vw, 24px); }
 
-      /* Section inner horizontal padding tightened */
-      .svc-heading-inner,
-      .process-inner,
-      .faq-inner,
-      .coverage-inner { padding-left: clamp(16px, 5vw, 32px); padding-right: clamp(16px, 5vw, 32px); }
-
-      /* Nav logo slightly smaller on phone */
-      .nav-logo svg { height: 24px; }
-
-      /* Footer columns center-aligned already at 680px breakpoint */
-      .footer-cta-btn { width: 100%; justify-content: center; }
-
-      /* Process steps tighter on small screen */
+      /* Process steps */
       .process-step { padding: 20px 16px; }
 
-      /* FAQ question font size */
-      .faq-q { font-size: 14px; }
+      /* FAQ */
+      .faq-q    { font-size: 14px; }
+      .faq-btn  { padding: 14px 4px; }
+
+      /* Nav */
+      .nav-logo svg { height: 24px; }
+
+      /* Footer */
+      .footer-cta-btn { width: 100%; justify-content: center; }
+
+      /* Section labels */
+      .section-label { font-size: 9px; }
+
+      /* Result section */
+      .res-head { padding: 0 20px; }
+
+      /* Tabs — horizontal scroll */
+      .svc-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
+      .svc-tab  { flex-shrink: 0; }
     }
 
     /* ═══════════════════════════════════════════
-       MOBILE — 360px and below (small Androids)
+       MOBILE — 360px (small Androids)
     ═══════════════════════════════════════════ */
     @media (max-width: 360px) {
-      .hero  { padding: 88px 16px 240px; }
+      .hero { padding: 88px 16px 180px; }
+      .hero h1 { font-size: clamp(26px, 7.5vw, 32px); }
       .res-display, .docs-display, .loc-display,
       .coverage-title, .process-title, .faq-title {
-        font-size: clamp(32px, 8.5vw, 40px);
+        font-size: clamp(28px, 8vw, 36px);
       }
-      .hero h1 { font-size: clamp(28px, 8vw, 34px); }
+      .svc-heading { font-size: clamp(28px, 8vw, 36px); }
     }
 
   </style>
@@ -4294,15 +4315,19 @@
     const hero    = document.querySelector('.hero');
     if (!skyline || !hero) return;
 
-    let curScale = 1.85;
-    let curGlow  = 1;
+    /* Smaller start scale on mobile so towers stay visible */
+    var startScale = window.innerWidth < 600 ? 1.2 : 1.85;
+    var endScale   = 1.0;
+
+    var curScale = startScale;
+    var curGlow  = 1;
 
     function lerp(a, b, t) { return a + (b - a) * t; }
 
     function loop() {
-      const progress = Math.min(Math.max(window.scrollY / hero.offsetHeight, 0), 1);
-      const tgtScale = 1.85 - 0.85 * progress;
-      const tgtGlow  = 1 - 0.6 * progress;
+      var progress = Math.min(Math.max(window.scrollY / hero.offsetHeight, 0), 1);
+      var tgtScale = startScale - (startScale - endScale) * progress;
+      var tgtGlow  = 1 - 0.6 * progress;
 
       curScale = lerp(curScale, tgtScale, 0.09);
       curGlow  = lerp(curGlow,  tgtGlow,  0.09);
