@@ -32,10 +32,13 @@
       --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
     }
 
+    html {
+      font-family: 'Cairo', 'Noto Sans Arabic', Arial, sans-serif;
+    }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--font);
+      font-family: 'Cairo', 'Noto Sans Arabic', Arial, sans-serif;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -214,10 +217,12 @@
       min-height: 80px;
     }
     @media (max-width: 600px) {
-      .hero-skyline {
-        transform: scale(1.2);
-      }
-      .hero-skyline svg { min-height: 110px; }
+      .hero-skyline { transform: scale(1.15); }
+      .hero-skyline svg { height: 150px; }
+
+      /* Shrink fades so towers aren't buried */
+      .hero-fade-1 { height: 28px; bottom: 0; }
+      .hero-fade-2 { height: 44px; bottom: -8px; }
     }
 
     /* ── BOTTOM GLOW — backlights the skyline silhouette ── */
@@ -1964,81 +1969,98 @@
     ═══════════════════════════════════════════ */
     @media (max-width: 600px) {
 
-      /* Hero */
-      .hero { padding: 96px 20px 200px; }
+      /* ── Hero ── */
+      .hero          { padding: 96px 20px 210px; }
+      .hero-bottom-glow { height: 260px; }
+      .hero h1       { font-size: clamp(28px, 8vw, 40px); line-height: 1.25; }
+      .hero-body     { font-size: 14px; line-height: 1.8; margin-bottom: 28px; }
+      .hero-eyebrow  { font-size: 10px; margin-bottom: 12px; }
 
-      /* Hero glow — taller on mobile so towers backlight properly */
-      .hero-bottom-glow { height: 280px; }
+      /* Stack CTA row */
+      .hero-cta-row  { flex-direction: column; align-items: stretch; gap: 12px; width: 100%; }
+      .hero-input    { width: 100%; text-align: center; font-size: 15px; }
+      .btn-cta       { width: 100%; justify-content: center; height: 52px; font-size: 15px; }
 
-      /* Stack email + CTA vertically */
-      .hero-cta-row {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-        width: 100%;
+      /* ── Services ── */
+      .svc-heading   { font-size: clamp(30px, 8vw, 44px); padding: 36px 20px 24px; }
+
+      /* Tabs: horizontal pill scroller */
+      .svc-tabs-outer {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+        padding: 0 16px 4px;
+        margin-bottom: 28px;
+        scrollbar-width: none;
       }
-      .hero-input  { width: 100%; text-align: center; font-size: 15px; }
-      .btn-cta     { width: 100%; justify-content: center; height: 52px; font-size: 15px; }
+      .svc-tabs-outer::-webkit-scrollbar { display: none; }
+      .svc-tabs      { flex-wrap: nowrap; gap: 6px; }
+      .svc-tab       { flex-shrink: 0; padding: 8px 14px; min-height: 44px; }
+      .svc-tab-en    { font-size: 12px; }
+      .svc-tab-ar    { font-size: 9px; }
 
-      /* Hero text */
-      .hero h1     { font-size: clamp(30px, 8vw, 42px); line-height: 1.25; }
-      .hero-body   { font-size: 14px; line-height: 1.85; margin-bottom: 32px; }
-      .hero-eyebrow { font-size: 10px; margin-bottom: 14px; }
+      /* Panel — single column, tight */
+      .svc-panel-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; }
+      .svc-panel.active {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .svc-title     { font-size: 24px; margin-bottom: 12px; }
+      .svc-intro     { font-size: 14px; line-height: 1.7; }
+      .svc-metrics   { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .svc-metric    { padding: 14px 12px; }
+      .svc-metric-num { font-size: 22px; }
+      .btn-svc-cta   { min-height: 44px; padding: 13px 24px; font-size: 13px; }
 
-      /* Services heading */
-      .svc-heading { font-size: clamp(32px, 8vw, 48px); }
+      /* Detail tabs */
+      .svc-detail-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; scrollbar-width: none; }
+      .svc-detail-tabs::-webkit-scrollbar { display: none; }
+      .svc-detail-tab  { flex-shrink: 0; white-space: nowrap; }
 
-      /* Section headings */
+      /* ── Section headings ── */
       .res-display, .docs-display, .loc-display,
       .coverage-title, .process-title, .faq-title {
-        font-size: clamp(34px, 8vw, 46px);
+        font-size: clamp(32px, 8vw, 44px);
       }
-
-      /* Touch targets */
-      .doc-preview-btn, .doc-dl-btn { min-height: 44px; padding: 12px 20px; }
-      .btn-svc-cta { min-height: 44px; padding: 13px 28px; }
-
-      /* Docs trust bar */
-      .docs-trust { padding: 16px clamp(14px, 4vw, 24px); }
-
-      /* Partners */
-      .partners-inner { padding: 0 clamp(14px, 4vw, 24px); }
-
-      /* Process steps */
-      .process-step { padding: 20px 16px; }
-
-      /* FAQ */
-      .faq-q    { font-size: 14px; }
-      .faq-btn  { padding: 14px 4px; }
-
-      /* Nav */
-      .nav-logo svg { height: 24px; }
-
-      /* Footer */
-      .footer-cta-btn { width: 100%; justify-content: center; }
-
-      /* Section labels */
       .section-label { font-size: 9px; }
 
-      /* Result section */
+      /* ── Results ── */
       .res-head { padding: 0 20px; }
 
-      /* Tabs — horizontal scroll */
-      .svc-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
-      .svc-tab  { flex-shrink: 0; }
+      /* ── Docs ── */
+      .docs-trust    { padding: 16px 16px; }
+
+      /* ── Process ── */
+      .process-step  { padding: 20px 14px; }
+
+      /* ── FAQ ── */
+      .faq-q         { font-size: 14px; line-height: 1.5; }
+      .faq-btn       { padding: 14px 0; }
+
+      /* ── Partners ── */
+      .partners-inner { padding: 0 16px; }
+
+      /* ── Footer ── */
+      .footer-cta-btn { width: 100%; justify-content: center; }
+
+      /* ── Touch targets ── */
+      .doc-preview-btn, .doc-dl-btn { min-height: 44px; padding: 12px 18px; }
+
+      /* ── Nav ── */
+      .nav-logo svg  { height: 24px; }
     }
 
     /* ═══════════════════════════════════════════
        MOBILE — 360px (small Androids)
     ═══════════════════════════════════════════ */
     @media (max-width: 360px) {
-      .hero { padding: 88px 16px 180px; }
-      .hero h1 { font-size: clamp(26px, 7.5vw, 32px); }
+      .hero          { padding: 84px 14px 190px; }
+      .hero h1       { font-size: clamp(24px, 7vw, 30px); }
+      .svc-heading   { font-size: clamp(26px, 7.5vw, 32px); }
       .res-display, .docs-display, .loc-display,
       .coverage-title, .process-title, .faq-title {
-        font-size: clamp(28px, 8vw, 36px);
+        font-size: clamp(26px, 7.5vw, 34px);
       }
-      .svc-heading { font-size: clamp(28px, 8vw, 36px); }
     }
 
   </style>
